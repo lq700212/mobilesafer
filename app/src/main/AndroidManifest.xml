@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.itheima.mobilesafer.activities.HomeActivity" />
+        <activity android:name="com.itheima.mobilesafer.activities.SettingActivity" />
+        <activity android:name="com.itheima.mobilesafer.activities.Setup1Activity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

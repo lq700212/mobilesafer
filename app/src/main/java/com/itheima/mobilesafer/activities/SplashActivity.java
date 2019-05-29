@@ -59,6 +59,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final int URL_ERROR = 102;
     private static final int IO_ERROR = 103;
     private static final int JSON_ERROR = 104;
+    private static final String SERVER_URL = "http://192.168.1.125:8080/update74.json";
 
     private RxPermissions mRxPermissions;
 
@@ -283,7 +284,7 @@ public class SplashActivity extends AppCompatActivity {
                 try {
                     //1.封装url地址
                     //update74.json放在apach/webapps/ROOT
-                    URL url = new URL("http://192.168.1.125:8080/update74.json");
+                    URL url = new URL(SERVER_URL);
                     //2.开启一个链接
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     //3.设置常见请求参数(请求头)
