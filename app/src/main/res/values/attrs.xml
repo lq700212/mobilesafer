@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="com.itheima.mobilesafer.activities.SettingActivity">
+    <declare-styleable name="com.itheima.mobilesafer.view.SettingItemView">
         <attr name="destitle" format="string" />
         <attr name="desoff" format="string" />
         <attr name="deson" format="string" />
