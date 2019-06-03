@@ -185,6 +185,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     class MyAdapter extends BaseAdapter {
+        class ViewHolder {
+            ImageView iv_icon;
+            TextView tv_title;
+
+            public ViewHolder(View view) {
+                iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
+                tv_title = (TextView) view.findViewById(R.id.tv_title);
+            }
+        }
+
         @Override
         public int getCount() {
             //条目的总数	文字组数 == 图片张数
@@ -203,12 +213,19 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = View.inflate(getApplicationContext(), R.layout.gridview_item, null);
-            ImageView iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
-            TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
+            View view;
+            ViewHolder viewHolder;
+            if (convertView == null) {
+                view = View.inflate(getApplicationContext(), R.layout.gridview_item, null);
+                viewHolder = new ViewHolder(view);
+                view.setTag(viewHolder);
+            } else {
+                view = convertView;
+                viewHolder = (ViewHolder) view.getTag();    //重新获取ViewHolder
+            }
 
-            iv_icon.setImageResource(mDrawableIds[position]);
-            tv_title.setText(mTitleStrs[position]);
+            viewHolder.iv_icon.setImageResource(mDrawableIds[position]);
+            viewHolder.tv_title.setText(mTitleStrs[position]);
 
             return view;
         }
