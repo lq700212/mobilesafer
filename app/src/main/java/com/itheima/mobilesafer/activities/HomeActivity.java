@@ -163,8 +163,9 @@ public class HomeActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(confirmPsd)) {
                     if (psd.equals(confirmPsd)) {
                         //进入应用手机防盗模块,开启一个新的activity
-                        Intent intent = new Intent(HomeActivity.this, Setup1Activity.class);
+                        Intent intent = new Intent(HomeActivity.this, SetupOverActivity.class);
                         startActivity(intent);
+
                         //跳转到新的界面以后需要去隐藏对话框
                         alertDialog.dismiss();
                     } else {

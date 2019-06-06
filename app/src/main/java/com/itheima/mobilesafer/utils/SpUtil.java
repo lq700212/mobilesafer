@@ -2,6 +2,7 @@ package com.itheima.mobilesafer.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
 
 import com.itheima.mobilesafer.activities.SettingActivity;
 
@@ -72,5 +73,18 @@ public class SpUtil {
             sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         }
         sp.edit().putBoolean(key, value).apply();
+    }
+
+    /**
+     * 从sp中移除指定节点
+     *
+     * @param context 上下文环境
+     * @param key     需要移除节点的名称
+     */
+    public static void remove(Context context, String key) {
+        if (sp == null) {
+            sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        }
+        sp.edit().remove(key).apply();
     }
 }

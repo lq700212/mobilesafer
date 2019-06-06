@@ -26,13 +26,13 @@
          android:focusable="false"
          android:focusableInTouchMode="false"
          让当前的 CheckBox不能被点击,即不能响应事件-->
-    <CheckBox
+    <android.support.v7.widget.AppCompatCheckBox
         android:id="@+id/cb_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:buttonTint="#000"
+        android:buttonTint="@color/colorPrimaryDark"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false" />

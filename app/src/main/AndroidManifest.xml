@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name="com.itheima.mobilesafer.MyApplication"
@@ -16,16 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.itheima.mobilesafer.activities.SplashActivity">
+        <activity android:name=".SetupOverActivity"></activity>
+        <activity android:name=".ContactListActivity" />
+        <activity android:name=".Setup4Activity" />
+        <activity android:name=".Setup3Activity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.itheima.mobilesafer.activities.HomeActivity" />
-        <activity android:name="com.itheima.mobilesafer.activities.SettingActivity" />
-        <activity android:name="com.itheima.mobilesafer.activities.Setup1Activity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".Setup1Activity" />
+        <activity android:name=".Setup2Activity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
