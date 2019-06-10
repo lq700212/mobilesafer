@@ -26,6 +26,7 @@ public class BootReceiver extends BroadcastReceiver {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         String curSimNumber = null;
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "用户未授予权限READ_PHONE_STATE");
             return;
         } else {
             curSimNumber = telephonyManager.getSimSerialNumber();

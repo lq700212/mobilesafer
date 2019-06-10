@@ -27,6 +27,44 @@ import com.itheima.mobilesafer.utils.ToastUtil;
  * Date:2019-05-16 17:22
  */
 public class HomeActivity extends AppCompatActivity {
+    public static final String TAG = "HomeActivity";
+
+    /**
+     * home界面的手机安全模块
+     */
+    public static final int HOME_SAFE = 0;
+    /**
+     * home界面的通讯卫士模块
+     */
+    public static final int HOME_CALLMSGSAFE = 1;
+    /**
+     * home界面的软件管理模块
+     */
+    public static final int HOME_APPS = 2;
+    /**
+     * home界面的进程管理模块
+     */
+    public static final int HOME_TASKMANAGER = 3;
+    /**
+     * home界面的流量统计模块
+     */
+    public static final int HOME_NETMANAGER = 4;
+    /**
+     * home界面的手机杀毒模块
+     */
+    public static final int HOME_TROJAN = 5;
+    /**
+     * home界面的缓存清理模块
+     */
+    public static final int HOME_SYSOPTIMIZE = 6;
+    /**
+     * home界面的高级工具模块
+     */
+    public static final int HOME_TOOLS = 7;
+    /**
+     * home界面的设置中心模块
+     */
+    public static final int HOME_SETTINGS = 8;
 
     private GridView gv_home;
     private String[] mTitleStrs;
@@ -63,14 +101,17 @@ public class HomeActivity extends AppCompatActivity {
         gv_home.setAdapter(new MyAdapter());
         //注册九宫格单个条目点击事件
         gv_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0:
+                    case HOME_SAFE:
                         //开启对话框
                         showDialog();
                         break;
-                    case 8:
+                    case HOME_CALLMSGSAFE:
+                        break;
+                    case HOME_SETTINGS:
                         Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
                         startActivity(intent);
                         break;

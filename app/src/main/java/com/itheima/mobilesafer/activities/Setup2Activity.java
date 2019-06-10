@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.itheima.mobilesafer.utils.ConstantValue;
@@ -23,6 +24,8 @@ import com.itheima.mobilesafer.view.SettingItemView;
  * Date:2019-06-04 19:12
  */
 public class Setup2Activity extends BaseSetupActivity {
+
+    public static final String TAG = "Setup2Activity";
 
     private SettingItemView siv_sim_bound;
 
@@ -98,6 +101,7 @@ public class Setup2Activity extends BaseSetupActivity {
 //                        String simSerialNumber = manager.getSimSerialNumber();
                         //6.3存储
                         String simSerialNumber = getSimSerialNumber();
+                        Log.d(TAG, "onClick: simSerialNumber = " + simSerialNumber);
                         SpUtil.putString(getApplicationContext(), ConstantValue.SIM_NUMBER, simSerialNumber);
                     } else {
                         ActivityCompat.requestPermissions(Setup2Activity.this,
