@@ -14,7 +14,7 @@ import com.itheima.mobilesafer.utils.ConstantValue;
 import com.itheima.mobilesafer.utils.SpUtil;
 import com.itheima.mobilesafer.utils.ToastUtil;
 
-public class Setup3Activity extends AppCompatActivity {
+public class Setup3Activity extends BaseSetupActivity {
 
     public static final String TAG = "Setup3Activity";
 
@@ -27,6 +27,35 @@ public class Setup3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_setup3);
         initUI();
         initData();
+    }
+
+    @Override
+    protected void showNextPage() {
+        //点击按钮以后,需要获取输入框中的联系人,再做下一页操作
+        String phone = et_phone_number.getText().toString();
+        if (!TextUtils.isEmpty(phone)) {
+            Intent intent = new Intent(Setup3Activity.this, Setup4Activity.class);
+            startActivity(intent);
+            finish();
+
+            //如果现在是输入电话号码,则需要去保存
+            SpUtil.putString(getApplicationContext(), ConstantValue.CONTACT_PHONE, phone);
+
+            //开启平移动画
+            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        } else {
+            ToastUtil.show(this, "请设置安全号码");
+        }
+    }
+
+    @Override
+    protected void showPrePage() {
+        Intent intent = new Intent(Setup3Activity.this, Setup2Activity.class);
+        startActivity(intent);
+        finish();
+
+        //开启平移动画
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
     private void initUI() {
@@ -73,32 +102,5 @@ public class Setup3Activity extends AppCompatActivity {
 
                 break;
         }
-    }
-
-    public void nextPage(View view) {
-        //点击按钮以后,需要获取输入框中的联系人,再做下一页操作
-        String phone = et_phone_number.getText().toString();
-        if (!TextUtils.isEmpty(phone)) {
-            Intent intent = new Intent(Setup3Activity.this, Setup4Activity.class);
-            startActivity(intent);
-            finish();
-
-            //如果现在是输入电话号码,则需要去保存
-            SpUtil.putString(getApplicationContext(), ConstantValue.CONTACT_PHONE, phone);
-
-            //开启平移动画
-            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-        } else {
-            ToastUtil.show(this, "请设置安全号码");
-        }
-    }
-
-    public void prePage(View view) {
-        Intent intent = new Intent(Setup3Activity.this, Setup2Activity.class);
-        startActivity(intent);
-        finish();
-
-        //开启平移动画
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 }

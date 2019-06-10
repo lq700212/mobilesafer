@@ -18,7 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SetupOverActivity"></activity>
+        <receiver
+            android:name="com.itheima.mobilesafer.receiver.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".SetupOverActivity" />
         <activity android:name=".ContactListActivity" />
         <activity android:name=".Setup4Activity" />
         <activity android:name=".Setup3Activity" />

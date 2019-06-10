@@ -23,7 +23,7 @@ import com.itheima.mobilesafer.view.SettingItemView;
  * Author:ryan.lei
  * Date:2019-06-04 19:12
  */
-public class Setup2Activity extends AppCompatActivity {
+public class Setup2Activity extends BaseSetupActivity {
 
     private SettingItemView siv_sim_bound;
 
@@ -34,6 +34,35 @@ public class Setup2Activity extends AppCompatActivity {
 
         initUI();
         initData();
+    }
+
+    @Override
+    protected void showNextPage() {
+        if (siv_sim_bound.isChecked()) {
+            String simSerialNumber = SpUtil.getString(this, ConstantValue.SIM_NUMBER, "");
+            if (!TextUtils.isEmpty(simSerialNumber)) {
+                Intent intent = new Intent(Setup2Activity.this, Setup3Activity.class);
+                startActivity(intent);
+                finish();
+
+                //开启平移动画
+                overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+            } else {
+                ToastUtil.show(this, "请绑定SIM卡");
+            }
+        } else {
+            ToastUtil.show(this, "请绑定SIM卡");
+        }
+    }
+
+    @Override
+    protected void showPrePage() {
+        Intent intent = new Intent(Setup2Activity.this, Setup1Activity.class);
+        startActivity(intent);
+        finish();
+
+        //开启平移动画
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
     private void initUI() {
@@ -93,34 +122,6 @@ public class Setup2Activity extends AppCompatActivity {
 
         return simSerialNumber;
     }
-
-    public void prePage(View view) {
-        Intent intent = new Intent(Setup2Activity.this, Setup1Activity.class);
-        startActivity(intent);
-        finish();
-
-        //开启平移动画
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
-    }
-
-    public void nextPage(View view) {
-        if (siv_sim_bound.isChecked()) {
-            String simSerialNumber = SpUtil.getString(this, ConstantValue.SIM_NUMBER, "");
-            if (!TextUtils.isEmpty(simSerialNumber)) {
-                Intent intent = new Intent(Setup2Activity.this, Setup3Activity.class);
-                startActivity(intent);
-                finish();
-
-                //开启平移动画
-                overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-            } else {
-                ToastUtil.show(this, "请绑定SIM卡");
-            }
-        } else {
-            ToastUtil.show(this, "请绑定SIM卡");
-        }
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -18,7 +18,9 @@ import android.view.animation.AlphaAnimation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.itheima.mobilesafer.utils.ConstantValue;
 import com.itheima.mobilesafer.utils.ProgressDialogUtil;
+import com.itheima.mobilesafer.utils.SpUtil;
 import com.itheima.mobilesafer.utils.StreamUtil;
 import com.itheima.mobilesafer.utils.ToastUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -257,20 +259,26 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        boolean open_update = SpUtil.getBoolean(this, ConstantValue.OPEN_UPDATE, false);
         //1.应用版本名称
         tv_version_name.setText("版本名称:" + getVersionName());
         //2.获取本地versionCode
         mLocalVersionCode = getVersionCode();
-        //3,获取服务器版本号(客户端发请求,服务端给响应,(json,xml))
-        //http://www.oxxx.com/update74.json?key=value  返回200 请求成功,流的方式将数据读取下来
-        //json中内容包含:
-        /**
-         * 更新版本的版本名称
-         * 新版本的描述信息
-         * 服务器版本号
-         * 新版本apk下载地址
-         */
-        checkVersion();
+        if (open_update) {
+            //3,获取服务器版本号(客户端发请求,服务端给响应,(json,xml))
+            //http://www.oxxx.com/update74.json?key=value  返回200 请求成功,流的方式将数据读取下来
+            //json中内容包含:
+            /**
+             * 更新版本的版本名称
+             * 新版本的描述信息
+             * 服务器版本号
+             * 新版本apk下载地址
+             */
+            checkVersion();
+        } else {
+            //在发送消息4秒后去处理,ENTER_HOME状态码指向的消息
+            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
+        }
     }
 
     /**
