@@ -233,7 +233,8 @@ public class SplashActivity extends AppCompatActivity {
         mRxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.READ_CONTACTS)
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.SEND_SMS)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {

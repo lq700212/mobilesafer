@@ -26,20 +26,29 @@ public class BootReceiver extends BroadcastReceiver {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         String curSimNumber = null;
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "用户未授予权限READ_PHONE_STATE");
+            Log.d(TAG, "权限问题:用户未授予权限READ_PHONE_STATE");
             return;
         } else {
             curSimNumber = telephonyManager.getSimSerialNumber();
+            Log.d(TAG, "curSimNumber: " + curSimNumber);
+//            curSimNumber = curSimNumber + "xxx";    //for test
         }
         //2,sp中存储的序列卡号
-        String sim_number = SpUtil.getString(context, ConstantValue.SIM_NUMBER, "");
+        String sim_number = null;
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "权限问题:用户未授予权限READ_PHONE_STATE");
+            return;
+        } else {
+            sim_number = SpUtil.getString(context, ConstantValue.SIM_NUMBER, "");
+            Log.d(TAG, "curSimNumber: " + curSimNumber + ", sim_number = " + sim_number);
+        }
         //3,比对不一致
         if (!curSimNumber.equals(sim_number)) {
             String contact_phone = SpUtil.getString(context, ConstantValue.CONTACT_PHONE, "");
             if (!TextUtils.isEmpty(contact_phone)) {
                 //4,发送短信给选中联系人号码
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(contact_phone, null, "SIM Card change!!", null, null);
+                smsManager.sendTextMessage(contact_phone, null, "SIM卡有变化", null, null);
             } else {
                 ToastUtil.show(context, "紧急联系人电话号码获取失败");
             }

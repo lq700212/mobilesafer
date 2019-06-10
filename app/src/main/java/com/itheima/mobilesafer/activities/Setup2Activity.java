@@ -122,6 +122,7 @@ public class Setup2Activity extends BaseSetupActivity {
                 getSystemService(Context.TELEPHONY_SERVICE);
         //6.2获取sim卡的序列卡号
         String simSerialNumber = manager.getSimSerialNumber();
+        Log.d(TAG, "getSimSerialNumber: " + simSerialNumber);
 
         return simSerialNumber;
     }
