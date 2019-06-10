@@ -2,9 +2,6 @@ package com.itheima.mobilesafer.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
-
-import com.itheima.mobilesafer.activities.SettingActivity;
 
 /**
  * Desction:手机安全卫士
