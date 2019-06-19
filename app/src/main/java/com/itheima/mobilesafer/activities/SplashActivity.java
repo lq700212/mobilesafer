@@ -1,8 +1,10 @@
 package com.itheima.mobilesafer.activities;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.itheima.mobilesafer.receiver.SmsReceiver;
 import com.itheima.mobilesafer.utils.ConstantValue;
 import com.itheima.mobilesafer.utils.ProgressDialogUtil;
 import com.itheima.mobilesafer.utils.SpUtil;
@@ -69,7 +72,6 @@ public class SplashActivity extends AppCompatActivity {
     private int mLocalVersionCode;
     private String mVersionDesc;
     private String mDownloadUrl;
-    private ProgressBar mProgressBar;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -133,7 +135,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void downloadApk() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            mProgressBar = new ProgressBar(SplashActivity.this);
             String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
             //mDownloadUrl为JSON从服务器端解析出来的下载地址
             RequestParams requestParams = new RequestParams(mDownloadUrl);
@@ -234,7 +235,8 @@ public class SplashActivity extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.READ_CONTACTS,
-                Manifest.permission.SEND_SMS)
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {

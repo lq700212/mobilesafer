@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,6 +27,11 @@ import com.itheima.mobilesafer.view.SettingItemView;
 public class Setup2Activity extends BaseSetupActivity {
 
     public static final String TAG = "Setup2Activity";
+
+    /**
+     * 检测权限READ_PHONE_STATE的requestCode
+     */
+    public static final int PERMISSION_REQUEST_READ_PHONE_STATE = 1;
 
     private SettingItemView siv_sim_bound;
 
@@ -91,7 +97,7 @@ public class Setup2Activity extends BaseSetupActivity {
                 siv_sim_bound.setCheck(!isChecked);
                 if (!isChecked) {
                     //检测运行时权限
-                    if (ActivityCompat.checkSelfPermission(Setup2Activity.this,
+                    if (ContextCompat.checkSelfPermission(Setup2Activity.this,
                             Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
 //                        //6,存储(序列卡号)
 //                        //6.1获取sim卡序列号TelephoneManager
@@ -105,7 +111,7 @@ public class Setup2Activity extends BaseSetupActivity {
                         SpUtil.putString(getApplicationContext(), ConstantValue.SIM_NUMBER, simSerialNumber);
                     } else {
                         ActivityCompat.requestPermissions(Setup2Activity.this,
-                                new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
+                                new String[]{Manifest.permission.READ_PHONE_STATE}, PERMISSION_REQUEST_READ_PHONE_STATE);
                     }
                 } else {
                     //7,将存储序列卡号的节点,从sp中删除掉
@@ -130,21 +136,25 @@ public class Setup2Activity extends BaseSetupActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                String simSerialNumber = getSimSerialNumber();
-                if (!TextUtils.isEmpty(simSerialNumber)) {
-                    Intent intent = new Intent(Setup2Activity.this, Setup3Activity.class);
-                    startActivity(intent);
-                    finish();
+        switch (requestCode) {
+            case PERMISSION_REQUEST_READ_PHONE_STATE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    String simSerialNumber = getSimSerialNumber();
+                    if (!TextUtils.isEmpty(simSerialNumber)) {
+                        Intent intent = new Intent(Setup2Activity.this, Setup3Activity.class);
+                        startActivity(intent);
+                        finish();
 
-                    //开启平移动画
-                    overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+                        //开启平移动画
+                        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+                    }
+                } else {
+                    siv_sim_bound.setCheck(false);
+                    ToastUtil.show(this, "授权失败,未能成功绑定SIM卡");
                 }
-            } else {
-                siv_sim_bound.setCheck(false);
-                ToastUtil.show(this, "授权失败,未能成功绑定SIM卡");
-            }
+                break;
+            default:
+                break;
         }
     }
 }

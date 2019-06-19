@@ -6,7 +6,7 @@ import org.xutils.BuildConfig;
 import org.xutils.x;
 
 /**
- * Desction:白骑士用户行为分析sdk
+ * Desction:手机安全卫士
  * Author:ryan.lei
  * Date:2019-05-16 19:15
  */

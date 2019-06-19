@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.itheima.mobilesafer.encrypt.Md5Util;
 import com.itheima.mobilesafer.utils.ConstantValue;
+import com.itheima.mobilesafer.utils.DeviceAdminUtil;
 import com.itheima.mobilesafer.utils.SpUtil;
 import com.itheima.mobilesafer.utils.ToastUtil;
 
@@ -110,6 +111,18 @@ public class HomeActivity extends AppCompatActivity {
                         showDialog();
                         break;
                     case HOME_CALLMSGSAFE:
+                        break;
+                    case HOME_APPS:
+                        break;
+                    case HOME_TASKMANAGER:
+                        break;
+                    case HOME_NETMANAGER:
+                        break;
+                    case HOME_TROJAN:
+                        break;
+                    case HOME_SYSOPTIMIZE:
+                        break;
+                    case HOME_TOOLS:
                         break;
                     case HOME_SETTINGS:
                         Intent intent = new Intent(HomeActivity.this, SettingActivity.class);

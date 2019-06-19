@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,11 @@ public class ContactListActivity extends AppCompatActivity {
 
     public static final String TAG = "ContactListActivity";
 
+    /**
+     * 检测权限READ_CONTACTS的requestCode
+     */
+    public static final int PERMISSION_REQUEST_READ_CONTACTS = 1;
+
     private RecyclerView rv_contact;
     private List<Contact> mContactList;
 
@@ -46,8 +52,8 @@ public class ContactListActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, PERMISSION_REQUEST_READ_CONTACTS);
         } else {
             mContactList = getAllContacts(this);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -61,7 +67,7 @@ public class ContactListActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case 1:
+            case PERMISSION_REQUEST_READ_CONTACTS:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     mContactList = getAllContacts(this);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(this);

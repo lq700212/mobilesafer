@@ -4,15 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.itheima.mobilesafer.utils.ConstantValue;
+import com.itheima.mobilesafer.utils.DeviceAdminUtil;
 import com.itheima.mobilesafer.utils.SpUtil;
 
 public class SetupOverActivity extends AppCompatActivity {
 
     private TextView tv_phone;
     private TextView tv_reset_setup;
+    private TextView tv_device_admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class SetupOverActivity extends AppCompatActivity {
     private void initUI() {
         tv_phone = (TextView) findViewById(R.id.tv_phone);
         tv_reset_setup = (TextView) findViewById(R.id.tv_reset_setup);
+        tv_device_admin = (TextView) findViewById(R.id.tv_device_admin);
 
         //设置联系人号码
         String phone = SpUtil.getString(this, ConstantValue.CONTACT_PHONE, "");
@@ -48,6 +53,13 @@ public class SetupOverActivity extends AppCompatActivity {
                 Intent intent = new Intent(SetupOverActivity.this, Setup1Activity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        tv_device_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DeviceAdminUtil(SetupOverActivity.this).startDeviceAdmin();
             }
         });
     }

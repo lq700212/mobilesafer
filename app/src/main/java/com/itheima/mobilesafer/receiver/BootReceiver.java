@@ -5,7 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -25,23 +25,19 @@ public class BootReceiver extends BroadcastReceiver {
         //1,获取开机后手机的sim卡的序列号
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         String curSimNumber = null;
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        String sim_number = null;
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "权限问题:用户未授予权限READ_PHONE_STATE");
             return;
         } else {
             curSimNumber = telephonyManager.getSimSerialNumber();
             Log.d(TAG, "curSimNumber: " + curSimNumber);
 //            curSimNumber = curSimNumber + "xxx";    //for test
-        }
-        //2,sp中存储的序列卡号
-        String sim_number = null;
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "权限问题:用户未授予权限READ_PHONE_STATE");
-            return;
-        } else {
+            //2,sp中存储的序列卡号
             sim_number = SpUtil.getString(context, ConstantValue.SIM_NUMBER, "");
             Log.d(TAG, "curSimNumber: " + curSimNumber + ", sim_number = " + sim_number);
         }
+
         //3,比对不一致
         if (!curSimNumber.equals(sim_number)) {
             String contact_phone = SpUtil.getString(context, ConstantValue.CONTACT_PHONE, "");
