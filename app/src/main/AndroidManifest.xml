@@ -10,13 +10,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <!--获取粗略坐标的权限-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--获取准确GPS坐标的权限-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 添加接受短信广播的权限 -->
+    <uses-permission android:name="android.permission.READ_SMS" /> <!-- 获取粗略坐标的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 获取准确GPS坐标的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 添加接受短信广播的权限 -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name="com.itheima.mobilesafer.MyApplication"
@@ -27,6 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".QueryAddressActivity"></activity>
+        <activity android:name=".AToolActivity" />
         <activity android:name=".SetupOverActivity" />
         <activity android:name=".ContactListActivity" />
         <activity android:name=".Setup4Activity" />
@@ -40,17 +40,17 @@
         </activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".SettingActivity">
-            <!--for test-->
+
+            <!-- for test -->
             <intent-filter>
                 <action android:name="com.itheima.SettingActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <!--隐式启动必须action和category都要设置-->
+                <!-- 隐式启动必须action和category都要设置 -->
             </intent-filter>
         </activity>
         <activity android:name=".Setup1Activity" />
-        <activity android:name=".Setup2Activity" />
-
-        <!--这块怀疑模拟器存在bug，在API_23的模拟器上OK，exported要为true，否则静态注册不生效，表示是否允许广播接收器接受本程序外的广播-->
+        <activity android:name=".Setup2Activity" /> <!-- 这块怀疑模拟器存在bug，在API_23的模拟器上OK，exported要为true，否则静态注册不生效，表示是否允许广播接收器接受本程序外的广播 -->
         <receiver
             android:name="com.itheima.mobilesafer.receiver.SmsReceiver"
             android:enabled="true"
@@ -75,6 +75,7 @@
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin_sample" />
+
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>

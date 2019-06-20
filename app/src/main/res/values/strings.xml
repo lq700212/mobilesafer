@@ -3,4 +3,7 @@
     <string name="tips">秋天秋天悄悄过去,留下小秘密,啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊aaaaaaaaaa</string>
     <string name="sample_device_admin">超级管理员</string>
     <string name="sample_device_admin_description">一键激活，一键锁屏，一键清除数据，一键卸载</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

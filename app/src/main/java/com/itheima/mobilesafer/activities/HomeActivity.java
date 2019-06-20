@@ -123,10 +123,12 @@ public class HomeActivity extends AppCompatActivity {
                     case HOME_SYSOPTIMIZE:
                         break;
                     case HOME_TOOLS:
+                        Intent atoolIntent = new Intent(HomeActivity.this, AToolActivity.class);
+                        startActivity(atoolIntent);
                         break;
                     case HOME_SETTINGS:
-                        Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
-                        startActivity(intent);
+                        Intent settingIntent = new Intent(HomeActivity.this, SettingActivity.class);
+                        startActivity(settingIntent);
                         break;
                 }
             }

@@ -7,7 +7,7 @@
 
     <TextView
         style="@style/TitleStyle"
-        android:background="#f30"
+        android:background="#F08080"
         android:text="确认密码" />
 
     <EditText
@@ -18,7 +18,8 @@
         android:hint="确认密码"
         android:inputType="textPassword"
         android:textColor="#000"
-        android:textColorHint="#D3D3D3" />
+        android:textColorHint="#D3D3D3"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,14 +30,22 @@
             android:id="@+id/bt_submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:text="确认" />
+            android:background="#F5F5F5"
+            android:text="确认"
+            android:textColor="#000"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/bt_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="取消" />
+            android:background="#F5F5F5"
+            android:text="取消"
+            android:textColor="#000"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

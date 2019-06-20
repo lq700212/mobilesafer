@@ -16,7 +16,9 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.itheima.mobilesafer.receiver.SmsReceiver;
@@ -34,6 +36,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -102,6 +105,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     };
+    private RelativeLayout rl_root;
 
     private void showUpdateDialog() {
         new AlertDialog.Builder(SplashActivity.this)
@@ -224,8 +228,67 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //检测权限
+        //初始化UI
+        initUI();
+        //检测权限,初始化数据
         checkRequestPermissions();
+        //初始化动画
+        initAnimation();
+        //初始化数据库
+        initDB();
+    }
+
+    private void initDB() {
+        //1,归属地数据拷贝过程
+        initAddressDB("address.db");
+    }
+
+    /**
+     * 拷贝数据库值files文件夹下
+     *
+     * @param dbName 数据库名称
+     */
+    private void initAddressDB(String dbName) {
+        //1,在files文件夹下创建同名dbName数据库文件过程
+        File files = getFilesDir();
+        File file = new File(files, dbName);
+        if (file.exists()) {
+            return;
+        }
+        InputStream stream = null;
+        FileOutputStream fos = null;
+        //2,输入流读取第三方资产目录下的文件
+        try {
+            stream = getAssets().open(dbName);
+            //3,将读取的内容写入到指定文件夹的文件中去
+            fos = new FileOutputStream(file);
+            //4,每次的读取内容大小
+            byte[] bs = new byte[1024];
+            int temp = -1;
+            while ((temp = stream.read(bs)) != -1) {
+                fos.write(bs, 0, temp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stream != null && fos != null) {
+                try {
+                    stream.close();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * 添加淡入动画效果
+     */
+    private void initAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(3000);
+        rl_root.startAnimation(alphaAnimation);
     }
 
     private void checkRequestPermissions() {
@@ -242,8 +305,6 @@ public class SplashActivity extends AppCompatActivity {
                     public void accept(Boolean aBoolean) throws Exception {
                         Log.i(TAG, "accept: " + aBoolean);
                         if (aBoolean) {
-                            //初始化UI
-                            initUI();
                             //初始化数据
                             initData();
                         } else {
@@ -258,6 +319,7 @@ public class SplashActivity extends AppCompatActivity {
      */
     private void initUI() {
         tv_version_name = (TextView) findViewById(R.id.tv_version_name);
+        rl_root = (RelativeLayout) findViewById(R.id.rl_root);
     }
 
     private void initData() {
