@@ -73,7 +73,7 @@ public class DeviceAdminUtil {
             //激活--->锁屏
             mDPM.lockNow();
             //锁屏同时去设置密码
-            mDPM.resetPassword("123", 0);
+            mDPM.resetPassword("123456", 0);
         } else {
             ToastUtil.show(mContext, "请先激活设备管理器权限");
 //            startDeviceAdmin();
