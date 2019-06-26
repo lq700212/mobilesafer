@@ -65,6 +65,8 @@ public class LocationService extends Service {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(contact_phone, null,
                     "longitude = " + longitude + ", latitude = " + latitude, null, null);
+            //停止位置服务
+            stopSelf();
         }
 
         @Override

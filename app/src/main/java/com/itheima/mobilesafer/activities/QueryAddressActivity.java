@@ -70,9 +70,10 @@ public class QueryAddressActivity extends AppCompatActivity {
                     //手机振动效果(vibrator振动)
                     Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                     //振动毫秒值
-                    vibrator.vibrate(2000);
+//                    vibrator.vibrate(2000);
                     //规律振动(振动规则(不振动时间，振动时间，不振动时间，振动时间......),重复次数)
-                    vibrator.vibrate(new long[]{2000, 5000, 2000, 5000}, -1);
+                    long[] pattern = new long[]{2000, 5000, 2000, 5000};
+                    vibrator.vibrate(pattern, -1);
                 }
             }
         });
