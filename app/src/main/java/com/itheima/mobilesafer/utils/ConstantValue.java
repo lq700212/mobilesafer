@@ -35,4 +35,6 @@ public class ConstantValue {
      * 是否设置完成导航界面key
      */
     public static final String SETUP_OVER = "setup_over";
+
+    public static final String OPEN_address = "open_address";
 }

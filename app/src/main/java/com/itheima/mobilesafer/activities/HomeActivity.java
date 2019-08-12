@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.itheima.mobilesafer.encrypt.Md5Util;
 import com.itheima.mobilesafer.utils.ConstantValue;
-import com.itheima.mobilesafer.utils.DeviceAdminUtil;
 import com.itheima.mobilesafer.utils.SpUtil;
 import com.itheima.mobilesafer.utils.ToastUtil;
 

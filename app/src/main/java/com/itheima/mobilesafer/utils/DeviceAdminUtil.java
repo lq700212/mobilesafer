@@ -100,6 +100,9 @@ public class DeviceAdminUtil {
      * 一键卸载功能
      */
     public void uninstall() {
+        if (isAdminActive()) {
+            mDPM.removeActiveAdmin(mDeviceAdminSample);//删除超级管理权限
+        }
         Intent intent = new Intent("android.intent.action.DELETE");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.setData(Uri.parse("package:" + mContext.getPackageName()));
